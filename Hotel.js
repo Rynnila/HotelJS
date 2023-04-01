@@ -3,7 +3,6 @@ const nomeHotel = prompt("Insira o nome do Hotel: ");
 alert(`O nome do hotel é "${nomeHotel}".`);
 
 const nomeUser=prompt("Qual é o nome do usuário: ");
-cadastro_hospedes();
 var senha= Number(prompt("Qual a senha do usuário?"));
 while(senha!="2678"){
     senha=prompt("Senha invalida, por favor digite-a novamente: ");
@@ -79,6 +78,7 @@ function cadastro_hospedes() {
         let idadeHospede=[''];
         let parar=0;
         let i=0;
+        let totalReserva=0;
         while(parar!="PARE"){
             
             let gratuidade =0 ;
@@ -93,19 +93,19 @@ function cadastro_hospedes() {
                 gratuidade+=1;
             }else if(idadeHospede[i]>=60){
                 alert(`${familiaHospedes[i]} cadastrada(o) com sucesso. ${familiaHospedes[i]} paga meia.`);
+                totalReserva+=diariaHotel/2;
                 meia+=1;
             }else{
                 alert(`${familiaHospedes[i]} cadastrada(o) com sucess0.`);
+                totalReserva+=diariaHotel;
             }
             i+=1;
             parar=prompt('Para parar digite "PARE" (qualquer outra inserção acrescenterá mais hopedes.');
         }
-        
 
-    }for (i = 0; i < familiaHospedes.length; i++) {
-            document.write(familiaHospedes[i]);
-            document.write("<br><br>", idadeHospede[i]);
-          } 
+        alert(`${nomeUser}, o valor total das hospedagens é de R$${totalReserva}; ${gratuidade} gratuidade(s); ${meia} meia(s).`);
+    }
+    
     inicio();
 }
 
