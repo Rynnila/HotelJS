@@ -69,20 +69,20 @@ function reserva_quartos() {
 }
 
 function cadastro_hospedes() {
-    alert(`HOTEL ${nomeHotel} - CADASTRO DE HÓSPEDES`);
-    let diariaHotel = parseFloat(prompt("Qual o valor padrão da diária?"));
+    alert(`HOTEL ${nomeHotel} - CADASTRO DE HÓSPEDES`);   
+    let familiaHospedes=[''];
+    let idadeHospede=[''];
+    let parar=0;
+    let i=0;
+    let totalReserva=0;
+    let gratuidade =0 ;
+    let meia =0;
+    let diariaHotel = parseFloat(prompt("Qual o valor padrão da diária?")); 
+
     if (diariaHotel<=0){
         alert(`Valor inválido, ${nomeUser}`);
     }else{
-        let familiaHospedes=[''];
-        let idadeHospede=[''];
-        let parar=0;
-        let i=0;
-        let totalReserva=0;
-        while(parar!="PARE"){
-            
-            let gratuidade =0 ;
-            let meia =0;
+        do{
             familiaHospedes[i]=prompt(`Qual o nome do ${i}º Hóspede?`);
             idadeHospede[i]=prompt(`Qual a idade do ${i}º Hóspede?`);
             while(idadeHospede<=0){
@@ -91,21 +91,21 @@ function cadastro_hospedes() {
             if(idadeHospede[i]<=6){
                 alert(`${familiaHospedes[i]} cadastrada(o) com sucesso. ${familiaHospedes[i]} possui gratuidade.`);
                 gratuidade+=1;
-            }else if(idadeHospede[i]>=60){
+            }
+            else if(idadeHospede[i]>=60){
                 alert(`${familiaHospedes[i]} cadastrada(o) com sucesso. ${familiaHospedes[i]} paga meia.`);
-                totalReserva+=diariaHotel/2;
+                totalReserva+=(diariaHotel/2);
                 meia+=1;
-            }else{
-                alert(`${familiaHospedes[i]} cadastrada(o) com sucess0.`);
+            }
+            else{
+                alert(`${familiaHospedes[i]} cadastrada(o) com sucesso.`);
                 totalReserva+=diariaHotel;
             }
             i+=1;
-            parar=prompt('Para parar digite "PARE" (qualquer outra inserção acrescenterá mais hopedes.');
-        }
-
-        alert(`${nomeUser}, o valor total das hospedagens é de R$${totalReserva}; ${gratuidade} gratuidade(s); ${meia} meia(s).`);
+            parar=prompt('Para parar digite "PARE" (qualquer outra inserção acrescenterá mais hóspedes.');
+        }while(parar!="PARE");
     }
-    
+    alert(`${nomeUser}, o valor total das hospedagens é de R$${totalReserva}; ${gratuidade} gratuidade(s); ${meia} meia(s).`);
     inicio();
 }
 
