@@ -15,7 +15,7 @@ var familiaHospedes=['']; //declarando antes pois será um array usado várias v
 var diariaHotel=0; //esse valor também se repete em duas funções 
 function inicio() {
 
-    var escolha = parseInt(prompt('Selecione uma opção \n1. Reserva de Quartos \n2. Cadastro de Hóspedes \n3. Cadastro de Eventos \n4. Abastecimento de Carros\n5. Cadastrar Buffet \n6. Sair'));
+    var escolha = parseInt(prompt('Selecione uma opção \n1. Reserva de Quartos \n2. Cadastro de Hóspedes \n3. Cadastro de Eventos \n4. Abastecimento de Carros\n5. Sair'));
 
     switch(escolha){
         case 1:
@@ -25,15 +25,12 @@ function inicio() {
             menu_cadastro_hospedes();
             break;
         case 3:
-            cadastro_eventos();
+            menu_cadastro_eventos();
             break
         case 4:
             abastecer_carros();
             break;
         case 5:
-            cadastro_buffet();
-            break;
-        case 6:
             sair();
             break;
         default:
@@ -77,7 +74,7 @@ function reserva_quartos() {
     inicio();
 }
 function menu_cadastro_hospedes(){
-    let cadastroescolha=parseInt(prompt("Opções disponíveis:\n1.Cadastrar\n2.Pesquisar\n3.Listar\n4.Sair"));
+    let cadastroescolha=parseInt(prompt("Opções disponíveis:\n1. Cadastrar\n2. Pesquisar\n3. Listar\n4.  Sair"));
     switch(cadastroescolha){
         case 1:
             cadastro_hospedes();
@@ -168,6 +165,28 @@ function pesquisa_hospedes() {
     }  
 }
 
+function menu_cadastro_eventos(){
+    let cadastroescolha=parseInt(prompt("Opções disponíveis:\n1. Cadastrar Evento\n2. Cadastrar Buffet\n3. Verificar Auditórios\n4. Disponibilidade Restaurante\n5. Sair"));
+    switch(cadastroescolha){
+        case 1:
+            cadastro_eventos();
+            break;
+        case 2:
+            cadastro_buffet();
+            break;
+        case 3:
+            disbonibilidade_salao();
+            break;
+        case 4:
+            inicio();
+            break;
+        default:
+            alert("Por favor, insira um valor de 1 a 5.");
+            menu_cadastro_eventos();
+            break;
+    }
+}
+
 function cadastro_eventos(){
     let quantidadeHoras=parseInt(prompt("Qual a duração do evento em horas?"));
     let quantidadeGarcons= parseInt(prompt("Quantos garçons serão necessários?"));
@@ -183,13 +202,13 @@ function cadastro_eventos(){
     else if (confirmacao_evento=="N"){
         alert(`${nomeUser}, reserva não efetuada`);
     }
-    inicio();
+    menu_cadastro_eventos();
 }
 
 function cadastro_buffet(){
     let quantidadeConvidados=parseInt(prompt("Qual o número de convidados para o evento?"));
-    if(quantidadeConvidados>350){
-        alert("Quantidade de convidados superior à capacidade máxima.");
+    if(quantidadeConvidados>350|| quantidadeConvidados<=0){
+        alert("Quantidade de convidados inválida superior à capacidade máxima.");
         cadastro_buffet();
     }
     let totalCafe=quantidadeConvidados*0.2;
@@ -208,7 +227,46 @@ function cadastro_buffet(){
     else if (confirmacao_buffet=="N"){
         alert(`${nomeUser}, reserva não efetuada`);
     }
-    inicio();
+    menu_cadastro_eventos();
+}
+
+function disbonibilidade_salao(){
+    let quantidadeConvidados=parseInt(prompt("Qual o número de convidados para o evento?"));
+    let cadeiras_adicionais =0;
+    let confirmacao_salao = '';
+    if(quantidadeConvidados>350 || quantidadeConvidados<=0){
+        alert("Quantidade de convidados inválida ou superior à capacidade máxima.");
+        disbonibilidade_salao();
+    }
+    else if(quantidadeConvidados<=220){
+        cadeiras_adicionais = quantidadeConvidados-150;
+        alert(`Use o auditório Laranja (inclua mais ${cadeiras_adicionais} cadeiras).`);
+        confirmacao_salao=prompt("Gostaria de efutuar a reserva? (S/N)");
+        while(confirmacao_salao!="S" &&        confirmacao_salao!="N"){
+            confirmacao_salao=prompt("Por favor, insira um valor válido.");
+        }
+        if(confirmacao_salao=="S"){
+            alert(`${nomeUser} reserva efetuada com sucesso.`);
+        }
+        else if (confirmacao_salao=="N"){
+            alert(`${nomeUser}, reserva não efetuada`);
+        }
+    }
+    else if(quantidadeConvidados>220 && quantidadeConvidados<=350){
+        alert(`Use o auditório Colorado.`);
+        confirmacao_salao=prompt("Gostaria de efutuar a reserva? (S/N)");
+        while(confirmacao_salao!="S" &&        confirmacao_salao!="N"){
+            confirmacao_salao=prompt("Por favor, insira um valor válido.");
+        }
+        if(confirmacao_salao=="S"){
+            alert(`${nomeUser} reserva efetuada com sucesso.`);
+        }
+        else if (confirmacao_salao=="N"){
+            alert(`${nomeUser}, reserva não efetuada`);
+        }
+    }
+
+    menu_cadastro_eventos()
 }
 
 
