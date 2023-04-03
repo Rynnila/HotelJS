@@ -10,6 +10,9 @@ while(senha!="2678"){
 
 alert(`Bem vind@ ao Hotel ${nomeHotel}, ${nomeUser}. É um imenso prazer ter você por aqui!`);
 
+
+var familiaHospedes=['']; //declarando antes pois será um array usado várias vezes durante o código
+var diariaHotel=0; //esse valor também se repete em duas funções 
 function inicio() {
 
     var escolha = parseInt(prompt('Selecione uma opção \n1. Reserva de Quartos \n2. Cadastro de Hóspedes \n3. Abastecimento de Carros \n4. Sair'));
@@ -19,7 +22,7 @@ function inicio() {
             reserva_quartos();
             break;
         case 2:
-            cadastro_hospedes();
+            menu_cadastro_hospedes();
             break;
         case 3:
             abastecer_carros();
@@ -36,7 +39,7 @@ function inicio() {
 function reserva_quartos() {
     alert(`HOTEL ${nomeHotel} - RESERVA DE QUARTOS`);
 
-    let diariaHotel = parseFloat(prompt("Qual o valor padrão da diária?"));
+    diariaHotel = parseFloat(prompt("Qual o valor padrão da diária?"));
     if (diariaHotel<=0){
         alert(`Valor inválido, ${nomeUser}`);
     }
@@ -67,17 +70,30 @@ function reserva_quartos() {
     }
     inicio();
 }
-
+function menu_cadastro_hospedes(){
+    let cadastroescolha=parseInt(prompt("Opções disponíveis:\n1.Cadastrar\n2.Pesquisar\n3.Listar\n4.Sair"));
+    switch(cadastroescolha){
+        case 1:
+            cadastro_hospedes();
+            break;
+        case 2:
+            pesquisa_hospedes();
+            break;
+        case 3:
+            listar_hospedes();
+            break;
+    }
+}
 function cadastro_hospedes() {
-    alert(`HOTEL ${nomeHotel} - CADASTRO DE HÓSPEDES`);   
-    let familiaHospedes=[''];
-    let idadeHospede=[''];
-    let parar=0;
-    let i=0;
-    let totalReserva=0;
-    let gratuidade =0 ;
-    let meia =0;
-    let diariaHotel = parseFloat(prompt("Qual o valor padrão da diária?")); 
+    alert(`HOTEL ${nomeHotel.toUpperCase()} - CADASTRO DE HÓSPEDES`);   
+
+    var idadeHospede=[''];
+    var parar=0;
+    var i=0;
+    var totalReserva=0;
+    var gratuidade =0 ;
+    var meia =0;
+    diariaHotel = parseFloat(prompt("Qual o valor padrão da diária?")); 
 
     if (diariaHotel<=0){
         alert(`Valor inválido, ${nomeUser}`);
@@ -102,11 +118,38 @@ function cadastro_hospedes() {
                 totalReserva+=diariaHotel;
             }
             i+=1;
-            parar=prompt('Para parar digite "PARE" (qualquer outra inserção acrescenterá mais hóspedes.');
+            if (i>=14){
+                alert("Máximo de cadastros atingido.");
+                parar="PARE";
+            }else{
+                parar=prompt('Para parar digite "PARE" (qualquer outra inserção acrescenterá mais hóspedes.');
+            }
         }while(parar!="PARE");
     }
     alert(`${nomeUser}, o valor total das hospedagens é de R$${totalReserva}; ${gratuidade} gratuidade(s); ${meia} meia(s).`);
-    inicio();
+    menu_cadastro_hospedes();
+}
+
+function listar_hospedes(){
+    var j= familiaHospedes.lastIndexOf();
+    while(j<=14){
+        document.write(familiaHospedes[j]);
+        j+=1;
+    }
+    menu_cadastro_hospedes();
+}
+
+function pesquisa_hospedes() {
+    alert(`HOTEL ${nomeHotel.toUpperCase()} - PESQUISA DE HÓSPEDES`); 
+    var encontro = prompt("Qual o nome do Hospede?");
+    encontro= familiaHospedes.indexOf(encontro);
+    if(encontro>=0){
+        alert(`Hóspede ${familiaHospedes[encontro]} foi encontrada(o)!`);
+        menu_cadastro_hospedes();
+    }else{
+        alert(`Hóspede ${encontro} não foi encontrada(0).`);
+        menu_cadastro_hospedes();
+    }  
 }
 
 function abastecer_carros() {
