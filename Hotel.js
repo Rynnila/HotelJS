@@ -8,7 +8,7 @@ while(senha!="2678"){
     senha=prompt("Senha invalida, por favor digite-a novamente: ");
 }
 
-alert(`Bem vind@ ao Hotel ${nomeHotel}, ${nomeUser}. É um imenso prazer ter você por aqui!`);
+alert(`Bem vinda(o) ao Hotel ${nomeHotel}, ${nomeUser}. É um imenso prazer ter você por aqui!`);
 
 
 var familiaHospedes=['']; //declarando antes pois será um array usado várias vezes durante o código
@@ -82,6 +82,13 @@ function menu_cadastro_hospedes(){
         case 3:
             listar_hospedes();
             break;
+        case 4:
+            inicio();
+            break;
+        default:
+            alert("Por favor, insira um valor de 1 a 4.");
+            menu_cadastro_hospedes();
+            break;
     }
 }
 function cadastro_hospedes() {
@@ -99,8 +106,9 @@ function cadastro_hospedes() {
         alert(`Valor inválido, ${nomeUser}`);
     }else{
         do{
-            familiaHospedes[i]=prompt(`Qual o nome do ${i}º Hóspede?`);
-            idadeHospede[i]=prompt(`Qual a idade do ${i}º Hóspede?`);
+            let j=i+1;
+            familiaHospedes[i]=prompt(`Qual o nome do ${j}º Hóspede?`);
+            idadeHospede[i]=prompt(`Qual a idade do ${j}º Hóspede?`);
             while(idadeHospede<=0){
                 idadeHospede[i]=prompt("Insira uma idade válida");
             }
@@ -131,9 +139,11 @@ function cadastro_hospedes() {
 }
 
 function listar_hospedes(){
-    var j= familiaHospedes.lastIndexOf();
-    while(j<=14){
-        document.write(familiaHospedes[j]);
+    var tamanho= familiaHospedes.length -1;
+    var j=0;
+    while(j<=tamanho){
+        let u=j+1;
+        alert(`Hóspede: ${familiaHospedes[j]} cadastrado. Na ${u}º posição.`);
         j+=1;
     }
     menu_cadastro_hospedes();
