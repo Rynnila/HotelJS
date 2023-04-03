@@ -15,7 +15,7 @@ var familiaHospedes=['']; //declarando antes pois será um array usado várias v
 var diariaHotel=0; //esse valor também se repete em duas funções 
 function inicio() {
 
-    var escolha = parseInt(prompt('Selecione uma opção \n1. Reserva de Quartos \n2. Cadastro de Hóspedes \n3. Cadastro de Eventos \n4. Abastecimento de Carros \n5. Sair'));
+    var escolha = parseInt(prompt('Selecione uma opção \n1. Reserva de Quartos \n2. Cadastro de Hóspedes \n3. Cadastro de Eventos \n4. Abastecimento de Carros\n5. Cadastrar Buffet \n6. Sair'));
 
     switch(escolha){
         case 1:
@@ -31,6 +31,9 @@ function inicio() {
             abastecer_carros();
             break;
         case 5:
+            cadastro_buffet();
+            break;
+        case 6:
             sair();
             break;
         default:
@@ -178,6 +181,31 @@ function cadastro_eventos(){
         alert(`${nomeUser} reserva efetuada com sucesso.`);
     }
     else if (confirmacao_evento=="N"){
+        alert(`${nomeUser}, reserva não efetuada`);
+    }
+    inicio();
+}
+
+function cadastro_buffet(){
+    let quantidadeConvidados=parseInt(prompt("Qual o número de convidados para o evento?"));
+    if(quantidadeConvidados>350){
+        alert("Quantidade de convidados superior à capacidade máxima.");
+        cadastro_buffet();
+    }
+    let totalCafe=quantidadeConvidados*0.2;
+    let totalAgua=quantidadeConvidados*0.5;
+    let totalSalgado=quantidadeConvidados*7;
+    let totalComida=(totalCafe*0.80)+(totalAgua*0.40)+((totalSalgado/100)*34);
+    alert(`O evento precisará de ${totalCafe} litros de café, ${totalAgua} litros de água e ${totalSalgado} salgados. O custo total do evento será de R$${totalComida}.`);
+
+    let confirmacao_buffet=prompt("Gostaria de efutuar a reserva? (S/N)");
+    while(confirmacao_buffet!="S" && confirmacao_buffet!="N"){
+        confirmacao_buffet=prompt("Por favor, insira um valor válido.");
+    }
+    if(confirmacao_buffet=="S"){
+        alert(`${nomeUser} reserva efetuada com sucesso.`);
+    }
+    else if (confirmacao_buffet=="N"){
         alert(`${nomeUser}, reserva não efetuada`);
     }
     inicio();
