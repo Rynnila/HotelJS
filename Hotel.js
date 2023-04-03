@@ -15,7 +15,7 @@ var familiaHospedes=['']; //declarando antes pois será um array usado várias v
 var diariaHotel=0; //esse valor também se repete em duas funções 
 function inicio() {
 
-    var escolha = parseInt(prompt('Selecione uma opção \n1. Reserva de Quartos \n2. Cadastro de Hóspedes \n3. Abastecimento de Carros \n4. Sair'));
+    var escolha = parseInt(prompt('Selecione uma opção \n1. Reserva de Quartos \n2. Cadastro de Hóspedes \n3. Cadastro de Eventos \n4. Abastecimento de Carros \n5. Sair'));
 
     switch(escolha){
         case 1:
@@ -25,9 +25,12 @@ function inicio() {
             menu_cadastro_hospedes();
             break;
         case 3:
+            cadastro_eventos();
+            break
+        case 4:
             abastecer_carros();
             break;
-        case 4:
+        case 5:
             sair();
             break;
         default:
@@ -161,6 +164,25 @@ function pesquisa_hospedes() {
         menu_cadastro_hospedes();
     }  
 }
+
+function cadastro_eventos(){
+    let quantidadeHoras=parseInt(prompt("Qual a duração do evento em horas?"));
+    let quantidadeGarcons= parseInt(prompt("Quantos garçons serão necessários?"));
+    let totalEvento=(quantidadeHoras*10.50)*quantidadeGarcons;
+    alert(`Custo total: R$${totalEvento}.`);
+    let confirmacao_evento=prompt("Gostaria de efutuar a reserva? (S/N)");
+    while(confirmacao_evento!="S" && confirmacao_evento!="N"){
+        confirmacao_evento=prompt("Por favor, insira um valor válido.");
+    }
+    if(confirmacao_evento=="S"){
+        alert(`${nomeUser} reserva efetuada com sucesso.`);
+    }
+    else if (confirmacao_evento=="N"){
+        alert(`${nomeUser}, reserva não efetuada`);
+    }
+    inicio();
+}
+
 
 function abastecer_carros() {
     alert(`HOTEL ${nomeHotel} - ABASTECER`);
