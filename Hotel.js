@@ -301,6 +301,11 @@ function disponibilidade_restaurante(){
 
 function abastecer_carros() {
     alert(`HOTEL ${nomeHotel} - ABASTECER`);
+    let preco_al_WO=prompt("PREÇOS WAYNE OIL\NQual o valor do álcool no posto Wayne Oil?");
+    let preco_gas_WO=prompt("Qual o valor da gasolina no posto Wayne Oil?");
+    let preco_al_SP=prompt("PRÇOS STARK PETROL\NQual o valor do álcool no posto Stark Petrol??");
+    let preco_gas_SP=prompt("Qual o valor da gasolina no posto Stark Petrol??");
+    let wayne_oil=
     inicio();
 }
 
