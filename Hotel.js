@@ -178,6 +178,9 @@ function menu_cadastro_eventos(){
             disbonibilidade_salao();
             break;
         case 4:
+            disponibilidade_restaurante();
+            break;
+        case 5:
             inicio();
             break;
         default:
@@ -255,7 +258,7 @@ function disbonibilidade_salao(){
     else if(quantidadeConvidados>220 && quantidadeConvidados<=350){
         alert(`Use o auditório Colorado.`);
         confirmacao_salao=prompt("Gostaria de efutuar a reserva? (S/N)");
-        while(confirmacao_salao!="S" &&        confirmacao_salao!="N"){
+        while(confirmacao_salao!="S" && confirmacao_salao!="N"){
             confirmacao_salao=prompt("Por favor, insira um valor válido.");
         }
         if(confirmacao_salao=="S"){
@@ -266,7 +269,33 @@ function disbonibilidade_salao(){
         }
     }
 
-    menu_cadastro_eventos()
+    menu_cadastro_eventos();
+}
+
+function disponibilidade_restaurante(){
+    let dia_semana=prompt("Qual o dia do evento?");
+    let hora_evento=parseInt(prompt("Qual o horário do Evento?"));
+    let nome_empresa='';
+    if(dia_semana=="sabado" || dia_semana=="domingo"){
+        if(hora_evento<7 || hora_evento>15){
+            alert("Restaurante indisponível");
+        }
+        else{
+            nome_empresa=prompt("Qual o nome da empresa?");
+            alert(`Restaurante reservado para ${nome_empresa}. \nNa ${dia_semana} às ${hora_evento}hrs.`);
+        }
+    }
+    else{
+        if(hora_evento<7 || hora_evento>23){
+            alert("Restaurante indisponível");
+        }
+        else{
+            nome_empresa=prompt("Qual o nome da empresa?");
+            alert(`Restaurante reservado para ${nome_empresa}. \nNa ${dia_semana} às ${hora_evento}hrs.`);
+        }
+    }
+    
+    menu_cadastro_eventos();
 }
 
 
