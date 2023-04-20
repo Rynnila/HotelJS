@@ -1,4 +1,4 @@
-
+//Início
 const nomeHotel = prompt("Insira o nome do Hotel: ");
 alert(`O nome do hotel é "${nomeHotel}".`);
 
@@ -13,6 +13,8 @@ alert(`Bem vinda(o) ao Hotel ${nomeHotel}, ${nomeUser}. É um imenso prazer ter 
 
 var familiaHospedes=['']; //declarando antes pois será um array usado várias vezes durante o código
 var diariaHotel=0; //esse valor também se repete em duas funções 
+
+//o menu do início está nessa função
 function inicio() {
 
     var escolha = parseInt(prompt('Selecione uma opção \n1. Reserva de Quartos \n2. Cadastro de Hóspedes \n3. Cadastro de Eventos \n4. Abastecimento de Carros\n5. Sair'));
@@ -39,6 +41,7 @@ function inicio() {
     }
 }		
 
+//função responsável pela reserva de quartos
 function reserva_quartos() {
     alert(`HOTEL ${nomeHotel} - RESERVA DE QUARTOS`);
 
@@ -73,6 +76,8 @@ function reserva_quartos() {
     }
     inicio();
 }
+
+//função que é um menu com as opções possíveis de cadastramento de hóspedes
 function menu_cadastro_hospedes(){
     let cadastroescolha=parseInt(prompt("Opções disponíveis:\n1. Cadastrar\n2. Pesquisar\n3. Listar\n4.  Sair"));
     switch(cadastroescolha){
@@ -94,6 +99,8 @@ function menu_cadastro_hospedes(){
             break;
     }
 }
+
+//função responsável pelo cadastro dos hóspedes no array
 function cadastro_hospedes() {
     alert(`HOTEL ${nomeHotel.toUpperCase()} - CADASTRO DE HÓSPEDES`);   
 
@@ -141,6 +148,7 @@ function cadastro_hospedes() {
     menu_cadastro_hospedes();
 }
 
+//função responsável pela listagem e exibição dos hóspedes no array
 function listar_hospedes(){
     var tamanho= familiaHospedes.length -1;
     var j=0;
@@ -152,6 +160,7 @@ function listar_hospedes(){
     menu_cadastro_hospedes();
 }
 
+//função responsável pelo pesquisa de um dos hóspedes no array
 function pesquisa_hospedes() {
     alert(`HOTEL ${nomeHotel.toUpperCase()} - PESQUISA DE HÓSPEDES`); 
     var encontro = prompt("Qual o nome do Hospede?");
@@ -165,6 +174,7 @@ function pesquisa_hospedes() {
     }  
 }
 
+//função que é um menu com as opções possíveis de cadastramento de eventos
 function menu_cadastro_eventos(){
     let cadastroescolha=parseInt(prompt("Opções disponíveis:\n1. Cadastrar Evento\n2. Cadastrar Buffet\n3. Verificar Auditórios\n4. Disponibilidade Restaurante\n5. Sair"));
     switch(cadastroescolha){
@@ -190,6 +200,7 @@ function menu_cadastro_eventos(){
     }
 }
 
+//função responsável pelo cadastro de eventos
 function cadastro_eventos(){
     let quantidadeHoras=parseInt(prompt("Qual a duração do evento em horas?"));
     let quantidadeGarcons= parseInt(prompt("Quantos garçons serão necessários?"));
@@ -208,6 +219,7 @@ function cadastro_eventos(){
     menu_cadastro_eventos();
 }
 
+//função responsável pelo cadastro de buffet
 function cadastro_buffet(){
     let quantidadeConvidados=parseInt(prompt("Qual o número de convidados para o evento?"));
     if(quantidadeConvidados>350|| quantidadeConvidados<=0){
@@ -233,6 +245,7 @@ function cadastro_buffet(){
     menu_cadastro_eventos();
 }
 
+//função responsável por verificar a disponibilidade do salão de festas
 function disbonibilidade_salao(){
     let quantidadeConvidados=parseInt(prompt("Qual o número de convidados para o evento?"));
     let cadeiras_adicionais =0;
@@ -272,6 +285,7 @@ function disbonibilidade_salao(){
     menu_cadastro_eventos();
 }
 
+//função responsável por verificar a disponibilidade do restaurante
 function disponibilidade_restaurante(){
     let dia_semana=prompt("Qual o dia do evento?");
     let hora_evento=parseInt(prompt("Qual o horário do Evento?"));
@@ -305,7 +319,23 @@ function abastecer_carros() {
     let preco_gas_WO=prompt("Qual o valor da gasolina no posto Wayne Oil?");
     let preco_al_SP=prompt("PRÇOS STARK PETROL\NQual o valor do álcool no posto Stark Petrol??");
     let preco_gas_SP=prompt("Qual o valor da gasolina no posto Stark Petrol??");
-    let wayne_oil=
+    let gas_barata=0;
+    let al_barato=0;
+    if (preco_gas_SP>preco_gas_WO){
+        gas_barata=preco_gas_WO;
+    }
+    else if (preco_gas_SP<preco_gas_WO){
+        gas_barata=preco_gas_SP;
+    }
+    if(preco_al_SP>preco_al_WO){
+        al_barato=preco_al_WO;
+    }
+    else if(preco_al_SP<preco_al_WO){
+        al_barato=preco_al_SP;
+    }
+    if(gas_barata-(gas_barata*0.30)>al_barato){
+        
+    }
     inicio();
 }
 
