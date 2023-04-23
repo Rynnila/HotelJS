@@ -17,7 +17,7 @@ var diariaHotel=0; //esse valor também se repete em duas funções
 //o menu do início está nessa função
 function inicio() {
 
-    var escolha = parseInt(prompt('Selecione uma opção \n1. Reserva de Quartos \n2. Cadastro de Hóspedes \n3. Cadastro de Eventos \n4. Abastecimento de Carros\n5. Sair'));
+    var escolha = parseInt(prompt('Selecione uma opção \n1. Reserva de Quartos \n2. Cadastro de Hóspedes \n3. Cadastro de Eventos \n4. Abastecimento de Carros\n5. Manutenção de Ar Condicionado\n6. Sair'));
 
     switch(escolha){
         case 1:
@@ -33,6 +33,9 @@ function inicio() {
             abastecer_carros();
             break;
         case 5:
+            ar_condicionado();
+            break;
+        case 6:
             sair();
             break;
         default:
@@ -339,11 +342,56 @@ function abastecer_carros() {
         posto= "Stark Petrol";
     }
     if((gas_barata*0.7)>(al_barato*100)){
-        alert(`${nomeUser}, é mais barato abastecer com álcool no posto ${posto}`)
+        alert(`${nomeUser}, é mais barato abastecer com álcool no posto ${posto}`);
     }
     else if((gas_barata*0.7)<(al_barato*100)){
-        alert(`${nomeUser}, é mais barato abastecer com gasolina no posto ${posto}`)
+        alert(`${nomeUser}, é mais barato abastecer com gasolina no posto ${posto}`);
     }
+    inicio();
+}
+
+//Função que realiza todas as contas de custos para o Ar Condicionado
+function ar_condicionado(){
+    let confirma_ar=0;
+    let nome_empresa_ar=[];
+    let total_servico=[];
+    let i=0;
+    do{
+        nome_empresa_ar[i]=prompt("Qual o nome da Empresa?");
+        let valor_por_aparelho=parseFloat(prompt("Qual o valor por aparelho"));;
+        let qtd_aparelho=parseInt(prompt("Qual a quantidade de aparelhos"));
+        let desconto=parseInt(prompt("Qual a porcentagem de desconto?"));
+        desconto/=100;
+        let qtd_min_desconto=parseInt(prompt("Qual o número mínimo de aparelhos para conseguir o desconto?"));
+
+        if (qtd_aparelho<qtd_min_desconto){
+            total_servico[i]=qtd_aparelho*valor_por_aparelho;
+        }
+        else if (qtd_aparelho>qtd_min_desconto){
+            if (desconto==0){
+                total_servico[i]=qtd_aparelho*valor_por_aparelho;
+            }
+            else{
+                total_servico[i]=qtd_aparelho*(valor_por_aparelho-(valor_por_aparelho*desconto));
+            }
+        }
+        alert(`O serviço da ${nome_empresa_ar[i]} custará R$${total_servico[i]}`);
+        i+=1;
+        confirma_ar=prompt(`Deseja informar novos dados, ${nomeUser}?(S/N)`)
+    }while(confirma_ar!="N")
+
+    var tamanho_ar= nome_empresa_ar.length -1;
+    var j=0;
+    let valor_empresa_barata=99999;
+    let nome_empresa_barata='';
+    while(j<=tamanho_ar){
+        if (total_servico[j]<valor_empresa_barata){
+            valor_empresa_barata=total_servico[j];
+            nome_empresa_barata=nome_empresa_ar[j];
+        }
+        j+=1;
+    }
+    alert(`O orçamento de menor valor é o [${nome_empresa_barata} por R$${valor_empresa_barata}]`);
     inicio();
 }
 
