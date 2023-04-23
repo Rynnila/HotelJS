@@ -312,29 +312,37 @@ function disponibilidade_restaurante(){
     menu_cadastro_eventos();
 }
 
-
+//Função para  o abastecimento dos carros, pega qual a gasolina e o álcool mais baratos, por fim confere se o álcool está 30% mais barato que a gasolina
 function abastecer_carros() {
     alert(`HOTEL ${nomeHotel} - ABASTECER`);
-    let preco_al_WO=prompt("PREÇOS WAYNE OIL\NQual o valor do álcool no posto Wayne Oil?");
+    let preco_al_WO=prompt("PREÇOS WAYNE OIL\nQual o valor do álcool no posto Wayne Oil?");
     let preco_gas_WO=prompt("Qual o valor da gasolina no posto Wayne Oil?");
-    let preco_al_SP=prompt("PRÇOS STARK PETROL\NQual o valor do álcool no posto Stark Petrol??");
+    let preco_al_SP=prompt("PREÇOS STARK PETROL\nQual o valor do álcool no posto Stark Petrol??");
     let preco_gas_SP=prompt("Qual o valor da gasolina no posto Stark Petrol??");
     let gas_barata=0;
     let al_barato=0;
+    let posto=0;
     if (preco_gas_SP>preco_gas_WO){
         gas_barata=preco_gas_WO;
+        posto= "Wayne Oil";
     }
     else if (preco_gas_SP<preco_gas_WO){
         gas_barata=preco_gas_SP;
+        posto= "Stark Petrol";
     }
     if(preco_al_SP>preco_al_WO){
         al_barato=preco_al_WO;
+        posto= "Wayne Oil";
     }
     else if(preco_al_SP<preco_al_WO){
         al_barato=preco_al_SP;
+        posto= "Stark Petrol";
     }
-    if(gas_barata-(gas_barata*0.30)>al_barato){
-        
+    if((gas_barata*0.7)>(al_barato*100)){
+        alert(`${nomeUser}, é mais barato abastecer com álcool no posto ${posto}`)
+    }
+    else if((gas_barata*0.7)<(al_barato*100)){
+        alert(`${nomeUser}, é mais barato abastecer com gasolina no posto ${posto}`)
     }
     inicio();
 }
